@@ -1,0 +1,47 @@
+scripts  banco de dados da 'EAZY'
+
+	CREATE TABLE funcionarios (
+    cod_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    funcao ENUM('editor', 'roteirista', 'ambos') NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    telefone VARCHAR(20),
+    especialidade VARCHAR(100),
+    max_horas_semanais INT NOT NULL
+);
+
+	CREATE TABLE clientes (
+    cod_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    telefone VARCHAR(20),
+    nicho VARCHAR(100),
+    plano ENUM('silver', 'gold', 'platinum') NOT NULL,
+    limite_revisoes INT NOT NULL
+);
+
+	CREATE TABLE projetos (
+    cod_projeto INT AUTO_INCREMENT PRIMARY KEY,
+
+    titulo VARCHAR(150) NOT NULL,
+    status_projeto VARCHAR(50) NOT NULL,
+    descricao TEXT,
+
+    cod_cliente INT NOT NULL UNIQUE,     -- Cada cliente só pode ter 1 projeto ao mesmo tempo
+    cod_editor INT,
+    cod_roteirista INT,
+
+    status_edicao VARCHAR(50),
+    status_roteiro VARCHAR(50),
+
+    data_prevista DATE,
+    data_inicio DATE,
+    data_entrega DATE,
+
+    qnt_revisoes_usadas INT DEFAULT 0,
+    projeto_final VARCHAR(255),
+
+    FOREIGN KEY (cod_cliente) REFERENCES clientes(cod_cliente),
+    FOREIGN KEY (cod_editor) REFERENCES funcionarios(cod_funcionario),
+    FOREIGN KEY (cod_roteirista) REFERENCES funcionarios(cod_funcionario)
+);
