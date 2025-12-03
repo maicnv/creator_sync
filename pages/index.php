@@ -1,5 +1,5 @@
 <?php
-    include 'C:\Users\994038\OneDrive - SENAC em Minas - EDU\PROJETOS\creator_sync\includes\conexao.php';
+    include 'conexao.php';
 
 ?>
 
@@ -12,7 +12,8 @@
         <title> teste </title>
     </head>
 
-        <body>
+
+    <body>
         <h1> Olá </h1>
     </body>
     
